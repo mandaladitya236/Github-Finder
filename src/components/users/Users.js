@@ -22,7 +22,7 @@ const Users=({users,loading})=>{
 const userStyle ={
     display:'grid',
     gridTemplateColumns:'repeat(3,1fr)',
-    gridGap:'2rem'
+    gridGap:'1rem'
 }
 Users.propTypes={
     users:PropTypes.array.isRequired,
