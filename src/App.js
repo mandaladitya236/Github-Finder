@@ -4,16 +4,14 @@ import './App.css';
 import Users from './components/users/Users';
 import axios from 'axios'
 import Search from './components/users/Search';
-import PropTypes from 'prop-types'
+
 
 class App extends Component {
   state= {
     users:[],
     loading:false
   };
-  static propTypes={
-    searchUsers: PropTypes.func.isRequired,
-  };
+ 
   
   // async componentDidMount(){
   //   // console.log(process.env.REACT_APP_GITHUB_CLIENT_ID);
@@ -30,6 +28,10 @@ class App extends Component {
     const res=await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
     this.setState({users:res.data.items,loading:false});
   }
+  //clear Users from State
+  clearUsers = () => {
+    this.setState({users:[], loading:false});
+  }
   render(){
   
        
@@ -37,7 +39,7 @@ class App extends Component {
     <div className="App">
       <Navbar  /> 
       <div className='container'>
-        <Search searchUsers={this.searchUsers} />
+        <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} />
         <Users loading={this.state.loading} users={this.state.users} />
       </div>
       
